@@ -37,6 +37,38 @@ class TaskController {
         next(error)
     }
   }
+
+  // finish
+  finishTask = async (req, res, next) => {
+    try {
+        const data = await this.#_service.finishOneTask(req.params.id);
+        if (!data) {
+            res.status(404).send({
+                message:"Task is not found"
+            });
+            return ;
+        };
+        res.redirect("/")
+    } catch (error) {
+        next(error)
+    }
+  }
+
+  // unfinish
+  unFinishTask = async (req, res, next) => {
+    try {
+        const data = await this.#_service.unFinishOneTask(req.params.id);
+        if (!data) {
+            res.status(404).send({
+                message:"Task is not found"
+            });
+            return ;
+        };
+        res.redirect("/")
+    } catch (error) {
+        next(error)
+    }
+  }
 }
 
 export default new TaskController();

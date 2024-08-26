@@ -10,35 +10,32 @@
     box-shadow: 2px 1px 0.5px 1px rgb(135, 134, 134);
   "
 >
-  <!-- check if task is done or not -->
   <% if (task.isDone == 'true') {%>
-  <p style="display: flex; align-self: center; text-decoration: line-through">
+  <p style="display: flex; margin: 0; text-decoration: line-through">
     <%= task.name%>
   </p>
   <%} else {%>
-  <p style="display: flex; align-self: center"><%= task.name%></p>
+  <p style="display: flex; margin: 0;"><%= task.name%></p>
   <% }%>
-  <!-- check if task is done or not -->
 
-  <!-- task finished or not -->
   <span style="display: flex; gap: 8px; align-items: center">
-    <% if (task.isDone == 'true') {%>
-    <button type="button" class="btn btn-success" style="width: 80px">
-      Unfinish
-    </button>
+    <% if(task.isDone == "false") {%>
+    <form method="post" action="/api/v1/task/finish/<%=task._id%>">
+        <button type="submit" class="btn btn-success" style="width: 80px">
+          Finish
+        </button>
+    </form>
     <%} else {%>
-    <button type="button" class="btn btn-success" style="width: 80px">
-      Finish
-    </button>
-    <% }%>
-    <!-- task finished or not -->
-
-    <!-- delete task -->
+    <form method="post" action="/api/v1/task/unfinish/<%=task._id%>">
+        <button type="submit" class="btn btn-success" style="width: 80px">
+          Unfinish
+        </button>
+    </form>
+    <%}%>
     <form method="post" action="/api/v1/task/<%=task._id%>?_method=DELETE">
       <button type="submit" class="btn btn-danger" style="width: 80px">
         Delete
       </button>
     </form>
-    <!-- delete task -->
   </span>
 </div>

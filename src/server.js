@@ -6,11 +6,13 @@ import path from "path";
 import methodOverride from "method-override";
 import router from "./routes/index.routes.js";
 import { Task } from "./modules/tasks/task.schema.js";
+import bodyParser from "body-parser";
 
 const app = express();
 
 // malumotni qaysi tipda almashishi
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // mongoDB ni ulash
 await mongo();
@@ -21,10 +23,10 @@ app.set("view engine", "ejs");
 app.use("/public", express.static(path.join(process.cwd(), "public")));
 
 // front qismini qaytarish
-app.get("/", async(req, res) => {
-    const tasks = await Task.find(); 
-    res.render("index", {tasks})
-})
+app.get("/", async (req, res) => {
+  const tasks = await Task.find();
+  res.render("index", { tasks });
+});
 
 // main end point
 app.use("/api/v1", router);

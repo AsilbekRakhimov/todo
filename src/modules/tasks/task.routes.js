@@ -11,5 +11,7 @@ router.post(
 );
 
 router.delete("/:id", taskController.deleteTask);
+router.post("/finish/:id", taskController.finishTask);
+router.post("/unfinish/:id", taskController.unFinishTask);
 
 export default router;
