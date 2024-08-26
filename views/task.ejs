@@ -1,0 +1,44 @@
+<div
+  style="
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    align-items: center;
+    border: 2px solid black;
+    padding: 5px 12px;
+    border-radius: 12px;
+    box-shadow: 2px 1px 0.5px 1px rgb(135, 134, 134);
+  "
+>
+  <!-- check if task is done or not -->
+  <% if (task.isDone == 'true') {%>
+  <p style="display: flex; align-self: center; text-decoration: line-through">
+    <%= task.name%>
+  </p>
+  <%} else {%>
+  <p style="display: flex; align-self: center"><%= task.name%></p>
+  <% }%>
+  <!-- check if task is done or not -->
+
+  <!-- task finished or not -->
+  <span style="display: flex; gap: 8px; align-items: center">
+    <% if (task.isDone == 'true') {%>
+    <button type="button" class="btn btn-success" style="width: 80px">
+      Unfinish
+    </button>
+    <%} else {%>
+    <button type="button" class="btn btn-success" style="width: 80px">
+      Finish
+    </button>
+    <% }%>
+    <!-- task finished or not -->
+
+    <!-- delete task -->
+    <form method="post" action="/api/v1/task/<%=task._id%>?_method=DELETE">
+      <button type="submit" class="btn btn-danger" style="width: 80px">
+        Delete
+      </button>
+    </form>
+    <!-- delete task -->
+  </span>
+</div>
